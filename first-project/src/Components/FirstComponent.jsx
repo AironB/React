@@ -3,12 +3,20 @@ import { useState } from "react";
 import { SecondComponent as Saludito} from "./SecondComponent"
 
 const FirstComponent = () =>{
-  const [nombreEstado, cambiarEstado] = useState("Airon")
+  const [person, setPerson] = useState({
+    nombre: "Airon",
+    edad: 26,
+    genero: "Masculino",
+    dui: "04118131-0"
+  })
+
+
   const cambioDeNombre = () => {
-    if(nombreEstado=="Airon"){
-      cambiarEstado("Goku");
+    if(person.nombre=="Airon"){
+      setPerson({...person, nombre: "Goku"});
+
     }else{
-      cambiarEstado("Airon");
+      cambiarEstado({...person, nombre: "Airon"});
     }
     //cambiarEstado("Goku");
     //alert("Ya cambiaste tu nombre pa, felicitaciones!!")
@@ -16,8 +24,8 @@ const FirstComponent = () =>{
     return(
       <>
         <h1>Soy el primer componente</h1>
-        <Saludito nombre={nombreEstado} edad="35" genero="Masculino" />
-        <Saludito nombre="Mario" edad="30" genero="Masculino"/>
+        {/**<Saludito nombre={person.nombre} edad={person.edad} genero={person.genero} />*/}
+        <Saludito usuario={person}/>
         <button onClick={()=>cambioDeNombre()}>Apretame mee mee</button>
       </>
 

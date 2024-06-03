@@ -1,10 +1,11 @@
 
-export const SecondComponent=({nombre, edad, genero})=>{
+export const SecondComponent=({usuario})=>{
     return(       
          <>
-            <h2>Hola {nombre}, como estas?</h2>
-            <h2>Tu edad es de {edad} años</h2>
-            <h2>Genero:{genero}</h2>
+            <h2>Hola {usuario.nombre}, como estas?</h2>
+            <h2>Tu edad es de {usuario.edad} años</h2>
+            <h2>Genero:{usuario.genero}</h2>
+            <h2>Dui: {usuario.dui}</h2>
         </>
     )
 }
