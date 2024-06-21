@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
+import { auth } from "../../../firebase/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const schema = yup.object().shape({
     email: yup.string().email('Correo no valido').required('El correo electronico es obligatorio'),
@@ -12,6 +14,15 @@ export const LoginForm = () => {
     const {register, handleSubmit, formState:{errors}}=useForm({
         resolver: yupResolver(schema)
     })
+
+    const onSubmitForm= data =>{
+        console.log(data);
+        signInWithEmailAndPassword(auth, data.email, data.password)
+        .then((userCredential)=>{
+            const user = userCredential.user;
+            console.log(user);
+        })
+    }
     return (
         <div>
         <form >
