@@ -1,4 +1,5 @@
 import {Session} from "./pages/Session/Session";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 export default function App() {
@@ -9,7 +10,12 @@ export default function App() {
 
   return (
     <>
-      <Session/>
+        <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<TodoApp />}/>
+                    <Route path="/login" element={<Session />}/>
+                </Routes>
+        </BrowserRouter>
     </>
   );
 }

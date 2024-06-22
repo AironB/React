@@ -3,6 +3,9 @@ import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { auth } from "../../../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { TodoApp } from "../../Todo/TodoApp";
+import { useContext } from "react";
+import { UserContext } from "../../../context/userDataContext";
 
 const schema = yup.object().shape({
     email: yup.string().email('Correo no valido').required('El correo electronico es obligatorio'),
@@ -15,12 +18,17 @@ export const LoginForm = () => {
         resolver: yupResolver(schema)
     })
 
+    const {data,setData}=useContext(UserContext)
+
     const onSubmitForm= data =>{
         console.log(data);
         signInWithEmailAndPassword(auth, data.email, data.password)
         .then((userCredential)=>{
             const user = userCredential.user;
             console.log(user);
+
+            //Guardamos el usuario en el context
+            setData(user);
         })
     }
     return (
@@ -37,7 +45,7 @@ export const LoginForm = () => {
                 {errors.password && <p>{errors.password.message}</p>}
             </section>
             
-            <button type="submit">Iniciar sesion</button>
+            <button type="button"  />Iniciar sesion
         </form>
         </div>
     )
