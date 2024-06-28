@@ -6,6 +6,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { TodoApp } from "../../Todo/TodoApp";
 import { useContext } from "react";
 import { UserContext } from "../../../context/userDataContext";
+import { useNavigate } from "react-router";
+
 
 const schema = yup.object().shape({
     email: yup.string().email('Correo no valido').required('El correo electronico es obligatorio'),
@@ -17,7 +19,7 @@ export const LoginForm = () => {
     const {register, handleSubmit, formState:{errors}}=useForm({
         resolver: yupResolver(schema)
     })
-
+    const navigate = useNavigate();
     const {data,setData}=useContext(UserContext)
 
     const onSubmitForm= data =>{
@@ -29,6 +31,8 @@ export const LoginForm = () => {
 
             //Guardamos el usuario en el context
             setData(user);
+            navigate('/')
+            
         })
     }
     return (
