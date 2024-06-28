@@ -3,7 +3,6 @@ import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { auth } from "../../../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { TodoApp } from "../../Todo/TodoApp";
 import { useContext } from "react";
 import { UserContext } from "../../../context/userDataContext";
 import { useNavigate } from "react-router";
