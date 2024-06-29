@@ -1,8 +1,10 @@
 import { useState } from "react"
-
+import {UseCountriesData} from "../../hooks/UseCountriesData"
+import { ListCountries } from "./Components/ListCountries"
 export const Countries = () => {
-    const[region, setRegion]= useState<string>
-    ("")
+    const[region, setRegion]= useState<string>("")
+    
+    const countries = UseCountriesData(region);
 
   return (
     <div className="container">
@@ -17,6 +19,15 @@ export const Countries = () => {
                     <option value="Oceania">Oceania</option>
                 </select>
             </label>
+
+            <div className="container-fluid">
+              {
+                countries.length > 1 ?
+            <ListCountries countries={countries}/>
+            :
+            <h1 className="text-white"> Loading</h1>
+              }
+            </div>
     </div>
   )
 }
